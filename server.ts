@@ -75,7 +75,8 @@ app.get('/api/places', (req: Request, res: Response) => {
 });
 
 app.get('/api/places/:id', (req: Request, res: Response) => {
-  const place = places.find((p) => p.id === parseInt(req.params.id));
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+  const place = places.find((p) => p.id === parseInt(id));
   
   if (!place) {
     return res.status(404).json({ error: 'Place not found' });
@@ -89,7 +90,8 @@ app.get('/api/events', (req: Request, res: Response) => {
 });
 
 app.get('/api/events/:id', (req: Request, res: Response) => {
-  const event = events.find((e) => e.id === parseInt(req.params.id));
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+  const event = events.find((e) => e.id === parseInt(id));
   
   if (!event) {
     return res.status(404).json({ error: 'Event not found' });
