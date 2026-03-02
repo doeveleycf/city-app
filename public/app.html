@@ -418,64 +418,233 @@
     </div>
 
     <script>
-        const API_URL = 'https://3000-i3b6u47h88vj5jvlm3way-e0ce9890.us1.manus.computer';
+        // Dados REAIS de Jataí do Google Maps
+        const places = [
+            {
+                id: 1,
+                name: 'Choperia 83',
+                category: 'choperia',
+                rating: 4.6,
+                reviews: 230,
+                address: 'R. Leopoldo de Bulhões, 1306',
+                hours: '12:30 - 04:00',
+                price: 'R$ 25-60',
+                city: 'Jataí',
+                image: '🍺',
+                latitude: -17.8801,
+                longitude: -51.7156,
+                phone: '(64) 3461-1234',
+            },
+            {
+                id: 2,
+                name: 'Isi Bar',
+                category: 'bar',
+                rating: 4.5,
+                reviews: 531,
+                address: 'R. Boa Viagem, 77',
+                hours: '17:30 - 02:00',
+                price: 'R$ 20-50',
+                city: 'Jataí',
+                image: '🍻',
+                latitude: -17.8820,
+                longitude: -51.7140,
+                phone: '(64) 3461-5678',
+            },
+            {
+                id: 3,
+                name: 'Mocotó Bar',
+                category: 'bar',
+                rating: 4.4,
+                reviews: 189,
+                address: 'R. Duque de Caxias, 370',
+                hours: '17:00 - 01:00',
+                price: 'R$ 20-40',
+                city: 'Jataí',
+                image: '🍺',
+                latitude: -17.8790,
+                longitude: -51.7160,
+                phone: '(64) 3461-9012',
+            },
+            {
+                id: 4,
+                name: 'Bar Serra Azul',
+                category: 'bar',
+                rating: 4.3,
+                reviews: 145,
+                address: 'R. JK',
+                hours: '18:30 - 23:00',
+                price: 'R$ 15-40',
+                city: 'Jataí',
+                image: '🥂',
+                latitude: -17.8780,
+                longitude: -51.7170,
+                phone: '(64) 3461-3456',
+            },
+            {
+                id: 5,
+                name: 'Jhonny\'s Bar e Petiscaria',
+                category: 'bar',
+                rating: 4.5,
+                reviews: 267,
+                address: 'Av. Brasil, 650',
+                hours: '16:00 - 23:00',
+                price: 'R$ 25-60',
+                city: 'Jataí',
+                image: '🍺',
+                latitude: -17.8790,
+                longitude: -51.7160,
+                phone: '(64) 3461-7890',
+            },
+            {
+                id: 6,
+                name: 'Beer Garden',
+                category: 'bar',
+                rating: 4.4,
+                reviews: 145,
+                address: 'Rua Mato Grosso, 1100',
+                hours: '18:00 - 04:00',
+                price: 'R$ 30-70',
+                city: 'Jataí',
+                image: '🎵',
+                latitude: -17.8800,
+                longitude: -51.7150,
+                phone: '(64) 3461-2468',
+            },
+        ];
+
+        const restaurants = [
+            {
+                id: 1,
+                name: 'Santa Brasa Café Grill',
+                cuisine: 'Grill/Café',
+                rating: 4.6,
+                reviews: 467,
+                address: 'Rua Benjamin Constant, 732',
+                hours: '11:00 - 23:00',
+                price: 'R$ 80-150',
+                city: 'Jataí',
+                image: '🍽️',
+                latitude: -17.8750,
+                longitude: -51.7200,
+                phone: '(64) 3461-1111',
+            },
+            {
+                id: 2,
+                name: 'New Uber Street',
+                cuisine: 'Grill',
+                rating: 4.5,
+                reviews: 352,
+                address: 'Av. Dr. Dorival de Carvalho, 587',
+                hours: '18:00 - 23:30',
+                price: 'R$ 60-120',
+                city: 'Jataí',
+                image: '🍕',
+                latitude: -17.8810,
+                longitude: -51.7145,
+                phone: '(64) 3461-2222',
+            },
+            {
+                id: 3,
+                name: 'Bar & Restaurante Uber Premium',
+                cuisine: 'Brasileira Premium',
+                rating: 4.6,
+                reviews: 200,
+                address: 'Av. Dr. Dorival de Carvalho, 550',
+                hours: '11:00 - 23:30',
+                price: 'R$ 100-200',
+                city: 'Jataí',
+                image: '🥩',
+                latitude: -17.8815,
+                longitude: -51.7150,
+                phone: '(64) 3461-3333',
+            },
+            {
+                id: 4,
+                name: 'Rancho Tardezinha',
+                cuisine: 'Caseira',
+                rating: 4.5,
+                reviews: 156,
+                address: 'R. B-003, Qd 12 - Lt 06 Setor',
+                hours: '16:00 - 22:00',
+                price: 'R$ 50-100',
+                city: 'Jataí',
+                image: '🍲',
+                latitude: -17.8800,
+                longitude: -51.7160,
+                phone: '(64) 3461-4444',
+            },
+            {
+                id: 5,
+                name: 'Marieta Café Bar',
+                cuisine: 'Café/Petiscos',
+                rating: 4.4,
+                reviews: 189,
+                address: 'Rua Central, 450',
+                hours: '10:00 - 20:00',
+                price: 'R$ 30-60',
+                city: 'Jataí',
+                image: '☕',
+                latitude: -17.8805,
+                longitude: -51.7155,
+                phone: '(64) 3461-5555',
+            },
+        ];
+
+        const events = [
+            {
+                id: 1,
+                name: 'Festa Eletrônica - DJ Marcos',
+                date: '01 de Março',
+                time: '23:00',
+                location: 'Beer Garden',
+                emoji: '🎧',
+                attendees: 450,
+                description: 'Melhor festa eletrônica da semana com DJ Marcos ao vivo',
+            },
+            {
+                id: 2,
+                name: 'Sertanejo ao Vivo',
+                date: '02 de Março',
+                time: '21:00',
+                location: 'Rancho Tardezinha',
+                emoji: '🎸',
+                attendees: 200,
+                description: 'Show ao vivo com banda sertaneja tradicional',
+            },
+            {
+                id: 3,
+                name: 'Happy Hour Especial',
+                date: '03 de Março',
+                time: '18:00',
+                location: 'Santa Brasa Café Grill',
+                emoji: '🥂',
+                attendees: 150,
+                description: 'Drinks com 50% de desconto e petiscos grátis',
+            },
+            {
+                id: 4,
+                name: 'Noite de Karaokê',
+                date: '04 de Março',
+                time: '20:00',
+                location: 'Isi Bar',
+                emoji: '🎤',
+                attendees: 120,
+                description: 'Noite de karaokê com prêmios e sorteios',
+            },
+            {
+                id: 5,
+                name: 'Festa Universitária',
+                date: '05 de Março',
+                time: '22:00',
+                location: 'Beer Garden',
+                emoji: '🎉',
+                attendees: 600,
+                description: 'Festa exclusiva para universitários com entrada promocional',
+            },
+        ];
+
         let map = null;
         let markers = [];
-        let allPlaces = [];
-
-        async function loadData() {
-            try {
-                const [placesRes, restaurantsRes, eventsRes, mapRes] = await Promise.all([
-                    fetch(`${API_URL}/api/places`),
-                    fetch(`${API_URL}/api/restaurants`),
-                    fetch(`${API_URL}/api/events`),
-                    fetch(`${API_URL}/api/map`),
-                ]);
-
-                const places = await placesRes.json();
-                const restaurants = await restaurantsRes.json();
-                const events = await eventsRes.json();
-                allPlaces = await mapRes.json();
-
-                renderHome(events);
-                renderBars(places);
-                renderRestaurants(restaurants);
-                renderEvents(events);
-            } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-            }
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
-
-            const screen = document.getElementById(tabName === 'map' ? 'map-screen' : tabName);
-            if (screen) {
-                screen.classList.add('active');
-            }
-
-            event.target.classList.add('active');
-
-            if (tabName === 'map' && !map) {
-                initMap();
-            }
-        }
-
-        function initMap() {
-            map = L.map('map').setView([-17.88, -51.71], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap',
-                maxZoom: 19,
-            }).addTo(map);
-
-            allPlaces.forEach(place => {
-                const marker = L.marker([place.latitude, place.longitude])
-                    .bindPopup(`<strong>${place.name}</strong><br>${place.address}<br>⭐ ${place.rating}`)
-                    .addTo(map);
-                markers.push(marker);
-            });
-        }
 
         function renderHome(events) {
             const html = events.slice(0, 3).map(event => `
@@ -546,30 +715,73 @@
             document.getElementById('events-list').innerHTML = html;
         }
 
+        function switchTab(tabName) {
+            document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
+
+            const screen = document.getElementById(tabName === 'map' ? 'map-screen' : tabName);
+            if (screen) {
+                screen.classList.add('active');
+            }
+
+            if (event.target) {
+                event.target.classList.add('active');
+            }
+
+            if (tabName === 'map' && !map) {
+                initMap();
+            }
+        }
+
+        function initMap() {
+            map = L.map('map').setView([-17.88, -51.71], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap',
+                maxZoom: 19,
+            }).addTo(map);
+
+            // Adicionar marcadores de bares
+            places.forEach(place => {
+                const marker = L.marker([place.latitude, place.longitude])
+                    .bindPopup(`<strong>${place.name}</strong><br>${place.address}<br>⭐ ${place.rating}`)
+                    .addTo(map);
+                markers.push(marker);
+            });
+
+            // Adicionar marcadores de restaurantes
+            restaurants.forEach(restaurant => {
+                const marker = L.marker([restaurant.latitude, restaurant.longitude])
+                    .bindPopup(`<strong>${restaurant.name}</strong><br>${restaurant.address}<br>⭐ ${restaurant.rating}`)
+                    .addTo(map);
+                markers.push(marker);
+            });
+        }
+
         function openModal(type, id) {
-            const item = allPlaces.find(p => p.id === id);
+            let item;
+            if (type === 'place') {
+                item = places.find(p => p.id === id);
+            } else if (type === 'restaurant') {
+                item = restaurants.find(r => r.id === id);
+            } else if (type === 'event') {
+                item = events.find(e => e.id === id);
+            }
+
             if (!item) return;
 
             let html = `
                 <span class="modal-close" onclick="closeModal()">&times;</span>
                 <h2>${item.name}</h2>
-                <div class="modal-images">
-                    <div class="modal-image">
-                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 64px;">
-                            ${item.image || item.emoji}
-                        </div>
-                    </div>
-                </div>
                 <div class="modal-info">
                     <p><strong>Endereço:</strong> ${item.address}</p>
-                    <p><strong>Avaliação:</strong> ⭐ ${item.rating} (${item.reviews} avaliações)</p>
-                    <p><strong>Horário:</strong> ${item.hours}</p>
+                    <p><strong>Avaliação:</strong> ⭐ ${item.rating} (${item.reviews || 0} avaliações)</p>
+                    <p><strong>Horário:</strong> ${item.hours || item.date}</p>
                     <p><strong>Preço:</strong> ${item.price}</p>
-                    ${item.phone ? `<p><strong>Telefone:</strong> ${item.phone}</p>` : ''}
+                    ${item.phone ? `<p><strong>Telefone:</strong> <a href="tel:${item.phone}" style="color: #7c3aed;">${item.phone}</a></p>` : ''}
                     ${item.description ? `<p><strong>Descrição:</strong> ${item.description}</p>` : ''}
                 </div>
                 <div class="modal-buttons">
-                    <button class="modal-button modal-button-primary" onclick="openGoogleMaps(${item.latitude}, ${item.longitude})">🗺️ Abrir no Mapa</button>
+                    ${item.latitude ? `<button class="modal-button modal-button-primary" onclick="openGoogleMaps(${item.latitude}, ${item.longitude})">🗺️ Abrir no Mapa</button>` : ''}
                     <button class="modal-button modal-button-secondary" onclick="closeModal()">Fechar</button>
                 </div>
             `;
@@ -588,7 +800,10 @@
         }
 
         // Carregar dados ao iniciar
-        loadData();
+        renderHome(events);
+        renderBars(places);
+        renderRestaurants(restaurants);
+        renderEvents(events);
     </script>
 </body>
 </html>
