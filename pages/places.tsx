@@ -14,136 +14,140 @@ export default function Places() {
   const places = [
     {
       id: 1,
-      name: 'Museu de Arte Moderna',
-      category: 'Museu',
-      emoji: '🏛️',
-      rating: 4.8,
-      reviews: 245,
-      address: 'Avenida Paulista, 1000',
-      hours: '10:00 - 18:00',
-      price: 'R$ 30',
+      name: 'Boteco do Zé',
+      category: 'bar',
+      emoji: '🍺',
+      rating: 4.7,
+      reviews: 156,
+      address: 'Rua Getulio Vargas, 450',
+      hours: '18:00 - 02:00',
+      price: 'R$ 20-50',
     },
     {
       id: 2,
-      name: 'Museu de História Natural',
-      category: 'Museu',
-      emoji: '🏛️',
-      rating: 4.6,
-      reviews: 189,
-      address: 'Rua da História, 500',
-      hours: '09:00 - 17:00',
-      price: 'R$ 25',
+      name: 'Club Noturno Sunset',
+      category: 'casa noturna',
+      emoji: '🎉',
+      rating: 4.9,
+      reviews: 312,
+      address: 'Avenida Goiás, 1200',
+      hours: '22:00 - 04:00',
+      price: 'R$ 30-80',
     },
     {
       id: 3,
-      name: 'Restaurante Gourmet',
-      category: 'Restaurante',
-      emoji: '🍽️',
-      rating: 4.9,
-      reviews: 312,
-      address: 'Rua Gourmet, 250',
-      hours: '12:00 - 23:00',
-      price: 'R$ 80-150',
+      name: 'Bar do Gordo',
+      category: 'bar',
+      emoji: '🍻',
+      rating: 4.5,
+      reviews: 89,
+      address: 'Rua Tocantins, 320',
+      hours: '17:00 - 01:00',
+      price: 'R$ 15-40',
     },
     {
       id: 4,
-      name: 'Pizzaria Tradicional',
-      category: 'Restaurante',
-      emoji: '🍽️',
-      rating: 4.7,
-      reviews: 428,
-      address: 'Rua da Pizza, 100',
-      hours: '11:00 - 22:00',
-      price: 'R$ 40-80',
+      name: 'Lounge Bar Premium',
+      category: 'lounge',
+      emoji: '🥂',
+      rating: 4.8,
+      reviews: 234,
+      address: 'Rua Paranaiba, 890',
+      hours: '19:00 - 03:00',
+      price: 'R$ 40-100',
     },
     {
       id: 5,
-      name: 'Festival de Música',
-      category: 'Evento',
-      emoji: '🎭',
-      rating: 4.7,
-      reviews: 156,
-      address: 'Parque Central',
-      hours: '19:00 - 23:00',
-      price: 'R$ 50',
+      name: 'Choperia Jataí',
+      category: 'choperia',
+      emoji: '🍺',
+      rating: 4.6,
+      reviews: 178,
+      address: 'Avenida Brasil, 650',
+      hours: '16:00 - 23:00',
+      price: 'R$ 25-60',
     },
     {
       id: 6,
-      name: 'Exposição de Arte',
-      category: 'Evento',
-      emoji: '🎭',
-      rating: 4.5,
-      reviews: 98,
-      address: 'Galeria de Arte',
-      hours: '10:00 - 18:00',
-      price: 'Gratuito',
+      name: 'Disco Club X',
+      category: 'discoteca',
+      emoji: '🎵',
+      rating: 4.4,
+      reviews: 145,
+      address: 'Rua Mato Grosso, 1100',
+      hours: '23:00 - 05:00',
+      price: 'R$ 35-70',
     },
   ];
 
-  const categoryStr = typeof category === 'string' ? category : '';
+  const categoryStr = typeof category === 'string' ? category.toLowerCase() : '';
   const filteredPlaces = categoryStr
     ? places.filter((p) => p.category.toLowerCase() === categoryStr)
     : places;
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">
-          {categoryStr ? `${categoryStr.charAt(0).toUpperCase() + categoryStr.slice(1)}s` : 'Todos os Lugares'}
-        </h1>
-        <p className="text-gray-600">
-          Encontre os melhores {categoryStr || 'lugares'} da sua cidade
-        </p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+      <div className="container mx-auto px-4 py-12">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-4 text-white">
+            {categoryStr 
+              ? `${categoryStr.charAt(0).toUpperCase() + categoryStr.slice(1)}s de Jataí` 
+              : '🌙 Todos os Lugares de Jataí'}
+          </h1>
+          <p className="text-gray-300">
+            Encontre os melhores {categoryStr || 'bares e casas noturnas'} da sua cidade
+          </p>
+        </div>
+
+        {filteredPlaces.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-xl text-gray-300">Nenhum lugar encontrado nesta categoria</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPlaces.map((place) => (
+              <div
+                key={place.id}
+                className="bg-slate-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition border border-slate-600"
+              >
+                <div className="bg-gradient-to-br from-purple-500 to-pink-500 h-40 flex items-center justify-center text-6xl">
+                  {place.emoji}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 text-white">{place.name}</h3>
+                  <p className="text-gray-300 mb-4 capitalize">{place.category}</p>
+
+                  <div className="space-y-3 mb-6 text-sm text-gray-300">
+                    <div className="flex items-center gap-2">
+                      <span>📍</span>
+                      <span>{place.address}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span>🕐</span>
+                      <span>{place.hours}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span>💰</span>
+                      <span>{place.price}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between border-t border-slate-600 pt-4">
+                    <div className="flex items-center gap-1">
+                      <span className="text-yellow-400">⭐</span>
+                      <span className="font-bold text-white">{place.rating}</span>
+                      <span className="text-gray-400">({place.reviews})</span>
+                    </div>
+                    <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded hover:shadow-lg transition">
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-
-      {filteredPlaces.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-xl text-gray-600">Nenhum lugar encontrado nesta categoria</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPlaces.map((place) => (
-            <div
-              key={place.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
-            >
-              <div className="bg-gradient-to-br from-blue-400 to-blue-600 h-40 flex items-center justify-center text-6xl">
-                {place.emoji}
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{place.name}</h3>
-                <p className="text-gray-600 mb-4">{place.category}</p>
-
-                <div className="space-y-3 mb-6 text-sm text-gray-700">
-                  <div className="flex items-center gap-2">
-                    <span>📍</span>
-                    <span>{place.address}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span>🕐</span>
-                    <span>{place.hours}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span>💰</span>
-                    <span>{place.price}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between border-t pt-4">
-                  <div className="flex items-center gap-1">
-                    <span className="text-yellow-400">⭐</span>
-                    <span className="font-bold">{place.rating}</span>
-                    <span className="text-gray-500">({place.reviews})</span>
-                  </div>
-                  <button className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-                    Detalhes
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
